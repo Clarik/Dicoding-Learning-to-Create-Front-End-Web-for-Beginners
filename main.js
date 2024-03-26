@@ -78,7 +78,6 @@ document.addEventListener(RENDER_EVENT, () => {
   incompleteBookshelfList.innerHTML = '';
   for(const book of bookList){
     const elem = makeBook(book);
-    console.log(book.id + ' ' + book.isComplete);
     if(book.isComplete)
       completeBookshelfList.append(elem);
     else
@@ -102,7 +101,6 @@ document.addEventListener(SEARCH_EVENT, function(event){
 
   for(const book of filteredBooks){
     const elem = makeBook(book);
-    console.log(book.id + ' ' + book.isComplete);
     if(book.isComplete)
       completeBookshelfList.append(elem);
     else
@@ -184,7 +182,7 @@ function makeBook(obj){
 function addBook(){
   const title = document.getElementById('inputBookTitle').value;
   const author = document.getElementById('inputBookAuthor').value;
-  const year = document.getElementById('inputBookYear').value;
+  const year = +document.getElementById('inputBookYear').value;
   const isComplete = document.getElementById('inputBookIsComplete').checked;
   const id = generateId();
 
@@ -193,8 +191,6 @@ function addBook(){
   bookList.push(obj);
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
-
-  console.log(bookList.length);
 }
 
 function searchBook(){
